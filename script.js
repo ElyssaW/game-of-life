@@ -1,7 +1,7 @@
 let c = document.getElementById("myCanvas")
 let ctx = c.getContext("2d")
 
-size = 80
+size = 20
 columns = c.width / size
 rows = c.height / size
 
@@ -21,10 +21,37 @@ function createBoard (numberOfColumns, numberOfRows, initialValue) {
     return array
 }
 
-let board = createBoard(columns+2, rows+2, 0)
+let loop
+let board = createBoard(columns, rows, 0)
+
+function clearBoard () {
+    if (loop) clearInterval(loop)
+    board = createBoard(columns, rows, 0)
+    drawBoard()
+}
+
+function drawBoard () {
+    board.forEach((row, x)=>{
+        row.forEach((col, y) => {
+            if (x == 0 || y == 0 || x == board.length-1 || y == board[x].length - 1) {
+                ctx.fillStyle = 'black'
+                ctx.fillRect(size * (x), size * (y), size, size)
+            } else if (board[x][y]) {
+                ctx.fillStyle = 'green'
+                ctx.fillRect(size * (x), size * (y), size, size)
+            } else if (x % 2 == 0 && y % 2 == 1 || x % 2 == 1 && y % 2 == 0) {
+                ctx.fillStyle = 'whitesmoke'
+                ctx.fillRect(size * (x), size * (y), size, size)
+            } else {
+                ctx.fillStyle = 'lightgrey'
+                ctx.fillRect(size * (x), size * (y), size, size)
+            }
+        })
+    })
+}
 
 function step () {
-    ctx.clearRect(0, 0, 800, 400)
+    ctx.clearRect(0, 0, 1000, 1000)
 
     console.log('New step')
 
@@ -33,7 +60,6 @@ function step () {
     })
 
     for (let x = 1; x < board.length - 1; x++) {
-        console.log(board[x])
         for (let y = 1; y < board[x].length-1; y++) {
 
             let sum = 
@@ -44,22 +70,20 @@ function step () {
             
             if (((sum === 2 && board[x][y] === 1) || sum === 3)) {
                 newBoard[x][y] = 1
-
-                ctx.fillStyle = 'black'
-                ctx.fillRect(size * (x), size * (y), size, size)
-                ctx.fillStyle = 'red'
-                ctx.font = "30px Arial";
-                ctx.fillText(`${x}, ${y}`, size * (x), size * (y)+40)
-
-            } else if (board[x][y] === 1) {
+            } else {
                 newBoard[x][y] = 0
             }
         }
+        
+        console.log(board[x], newBoard[x])
     }
 
     board = newBoard.map(row => {
         return [...row]
     })
+
+    // Draw
+    drawBoard()
 }
 
 myCanvas.onclick = function (e) {
@@ -77,18 +101,19 @@ myCanvas.onclick = function (e) {
             clickY > (y) * size && clickY < (y) * size + size) {
                 board[x][y] = 1
 
-                ctx.fillStyle = 'black'
+                ctx.fillStyle = 'green'
                 ctx.fillRect(size * (x), size * (y), size, size)
-                ctx.fillStyle = 'red'
-                ctx.font = "30px Arial";
-                ctx.fillText(`${x}, ${y}`, size * (x), size * (y)+40)
             }
         })
     })
 }
 
-// function startGame () {
-//     loop = setInterval(step, 500)
-// }
+drawBoard()
 
-// startGame()
+function startGame () {
+    loop = setInterval(step, 500)
+}
+
+function stopGame () {
+    clearInterval(loop)
+}

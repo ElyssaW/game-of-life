@@ -10,9 +10,15 @@
     </head>
     <body>
 
-        <canvas id="myCanvas" width="800" height="400" style="border:1px solid #000000;"></canvas>
+        <div>
+            <canvas id="myCanvas" width="880" height="480" style="border:1px solid #000000;"></canvas>
 
-        <button onclick="step()">Step</button>
+            <div class="button-bank">
+                <button onclick="clearBoard()">Clear</button>
+                <button onclick="step()">Step</button>
+                <button onclick="startGame()">Play</button>
+            </div>
+        </div>
         
         <script src="script.js" async defer></script>
     </body>
