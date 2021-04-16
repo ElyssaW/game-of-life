@@ -4,6 +4,10 @@ let ctx = c.getContext("2d")
 size = 20
 columns = c.width / size
 rows = c.height / size
+blockColor = '#2a3d45'
+borderColor = '#2a3d45'
+primaryColor = '#bcac9b'
+secondaryColor = '#ddc9b4'
 
 function createBoard (numberOfColumns, numberOfRows, initialValue) {
     let array = []
@@ -34,16 +38,16 @@ function drawBoard () {
     board.forEach((row, x)=>{
         row.forEach((col, y) => {
             if (x == 0 || y == 0 || x == board.length-1 || y == board[x].length - 1) {
-                ctx.fillStyle = 'black'
+                ctx.fillStyle = borderColor
                 ctx.fillRect(size * (x), size * (y), size, size)
             } else if (board[x][y]) {
-                ctx.fillStyle = 'green'
+                ctx.fillStyle = blockColor
                 ctx.fillRect(size * (x), size * (y), size, size)
             } else if (x % 2 == 0 && y % 2 == 1 || x % 2 == 1 && y % 2 == 0) {
-                ctx.fillStyle = 'whitesmoke'
+                ctx.fillStyle = primaryColor
                 ctx.fillRect(size * (x), size * (y), size, size)
             } else {
-                ctx.fillStyle = 'lightgrey'
+                ctx.fillStyle = secondaryColor
                 ctx.fillRect(size * (x), size * (y), size, size)
             }
         })
@@ -101,7 +105,7 @@ myCanvas.onclick = function (e) {
             clickY > (y) * size && clickY < (y) * size + size) {
                 board[x][y] = 1
 
-                ctx.fillStyle = 'green'
+                ctx.fillStyle = blockColor
                 ctx.fillRect(size * (x), size * (y), size, size)
             }
         })
@@ -111,9 +115,17 @@ myCanvas.onclick = function (e) {
 drawBoard()
 
 function startGame () {
-    loop = setInterval(step, 500)
+    play.innerText = 'Stop'
+
+    if (loop) {
+        stopGame()
+    } else {
+        loop = setInterval(step, 500)
+    }
 }
 
 function stopGame () {
+    play.innerText = 'Play'
     clearInterval(loop)
+    loop = null
 }
