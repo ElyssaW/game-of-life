@@ -11,12 +11,39 @@
     <body>
 
         <div>
+            <h1 class="title">Conway's Game of Life</h1>
             <canvas id="myCanvas" width="880" height="480" style="border:1px solid #000000;"></canvas>
 
             <div class="button-bank">
                 <button id='clear' onclick="clearBoard()">Clear</button>
                 <button id='step' onclick="step()">Step</button>
                 <button id='play' onclick="startGame()">Play</button>
+            </div>
+
+            <div class="textbox">
+                <h3>What is This?</h3>
+                <p>    
+                    This is Conway's Game of Life! No, not the board game. Conway's Game of Life is a famous cellular automation, a sort of math game, where a simple set of rules (Here, there's just four, and you can cook them down into three) can be applied to individual "cells" in a large grid, creating spontaneous and surprising patterns of emergent behavior. Click on the cells above to bring them to life, and press "step" to see how your cell population changes over time, or "play" to let it continuously update.
+                </p>
+
+                <h3>Rules</h3>
+                <ol>
+                    <li>Any live cell with fewer than two live neighbours dies, as if by underpopulation.</li>
+                    <li>Any live cell with two or three live neighbours lives on to the next generation.</li>
+                    <li>Any live cell with more than three live neighbours dies, as if by overpopulation.</li>
+                    <li>Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.</li>
+                </ol>
+
+                <h3>Tell Me More</h3>
+                <p>
+                    There's many different types of cellular automata, but Conway's Game of Life is one of the most famous. It's adept at simulating living populations, from animal herds to bacterial colonies, with rules that account for overpopulation, underpopulation, and a stable baseline.
+                </p>
+                <p>
+                    If you've played a game with any sort of procedural or randomly generated element, you've almost certainly seen cellular automata in action, maybe even Conway's Game of Life itself. It's a prime example of how game systems can have enormous depth <i>without</i> needing enormous complexity. You could fit the rules of this game on a sticky note, but the permutations it creates are endless and ever-changing.
+                </p>
+                <p>
+                    It's also a neat example of how to break a living system - animal populations, in this case - down into a programmable simulation. Notice that the rules don't define the behavior of the population directly: they define the behavior of individuals <i>inside</i> of the population, whether they live or die or reproduce, and the behavior of the wider population emerges based on those individual acts. The system is a direct sum of its parts.
+                </p>
             </div>
         </div>
         

@@ -4,6 +4,23 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.title {
+    background-color: #ddc9b4;
+    color: #2a3d45;
+    margin: 0;
+    padding: 20px;
+    width: 100%;
+    text-align: left;
+}
+
+#myCanvas{
+    margin: 30px;
 }
 
 button {
@@ -18,4 +35,15 @@ button {
     width: 100%;
     display: flex;
     justify-content: space-around;
+}
+
+.textbox {
+    border: 10px solid #bcac9b;
+    margin: 20px 10px;
+    background-color: #ddc9b4;
+    color: #2a3d45;
+    width: 800px;
+    text-align: left;
+    font-size: 18px;
+    padding: 20px 30px;
 }
